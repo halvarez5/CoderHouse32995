@@ -13,9 +13,6 @@ public class Bat : MonoBehaviour
     {
         maxLocation = transform.position + new Vector3(3, 3, 3);
         minLocation = transform.position + new Vector3(-3, -3, -3);
-
-        Debug.Log(maxLocation);
-        Debug.Log(minLocation);
     }
 
     // Start is called before the first frame update

@@ -11,11 +11,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float rotationSpeed;
 
     private bool canJump = true;
+    private float defaultSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        defaultSpeed = speed;
     }
 
     // Update is called once per frame
@@ -30,6 +31,11 @@ public class Player : MonoBehaviour
             transform.position += (transform.forward * verticalMovement + transform.right * horizontalMovement) * speed * Time.deltaTime;
         }
 
+        if (Input.GetKey(KeyCode.LeftShift))
+            speed = defaultSpeed * 2;
+        else
+            speed = defaultSpeed;
+
         Rotate(GetRotationInput());
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
@@ -43,15 +49,15 @@ public class Player : MonoBehaviour
         rb.AddForce(Vector3.up * forceGravity, ForceMode.Impulse);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        canJump = true;
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    canJump = true;
+    //}
 
-    private void OnCollisionExit(Collision collision)
-    {
-        canJump = false;
-    }
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    canJump = false;
+    //}
 
     private void Rotate(Vector2 p_scrollDelta)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAim : MonoBehaviour
 {
-    [SerializeField] private float rotationSpeed = 750;
+    //[SerializeField] private float rotationSpeed = 750;
 
     // Start is called before the first frame update
     void Start()

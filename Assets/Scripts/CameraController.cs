@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCamera cam1;
+    #region
+    /*[SerializeField] private CinemachineVirtualCamera cam1;
     [SerializeField] private CinemachineVirtualCamera cam2;
 
     // Start is called before the first frame update
@@ -26,5 +27,20 @@ public class CameraController : MonoBehaviour
     {
         c1.gameObject.SetActive(true);
         c2.gameObject.SetActive(false);
+    }*/
+    #endregion
+
+    [SerializeField] private float sesitivity = 2;
+
+    private void FixedUpdate()
+    {
+        float v = Input.GetAxis("Mouse Y") * -1;
+
+        if (v != 0)
+        {
+            transform.RotateAround(transform.position, transform.right, v * 90 * sesitivity * Time.deltaTime);
+        }
+
+
     }
 }

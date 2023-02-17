@@ -6,9 +6,8 @@ public class ObjectTwoMoves : MonoBehaviour
 {
     enum DirectionMove
     {
-        x,
-        y,
-        z
+        left,
+        right
     }
 
     [SerializeField] private float speed = 1f;
@@ -19,34 +18,47 @@ public class ObjectTwoMoves : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (maxLocation.x > transform.position.x && minLocation.x < transform.position.x)
-            transform.position += transform.forward * speed * Time.deltaTime;
-        else
+        switch (direction)
         {
-            transform.Rotate(new Vector3(0f, 180f, 0f));
-            transform.position += transform.forward * speed * Time.deltaTime;
+            case DirectionMove.left:
+                if (Vector3.Distance(transform.position, maxLocation) < 0.1f)
+                {
+                    direction = DirectionMove.right;
+                }
+                break;
+            case DirectionMove.right:
+                if (Vector3.Distance(transform.position, minLocation) < 0.1f)
+                {
+                    direction = DirectionMove.left;
+                }
+                break;
+            default:
+                break;
         }
 
-        if (maxLocation.y > transform.position.y && minLocation.y < transform.position.y)
-            transform.position += transform.forward * speed * Time.deltaTime;
-        else
-        {
-            transform.Rotate(new Vector3(0f, 180f, 0f));
-            transform.position += transform.forward * speed * Time.deltaTime;
-        }
+        transform.position = Vector3.MoveTowards(transform.position, (direction == DirectionMove.left) ? maxLocation : minLocation, speed * Time.deltaTime);
 
-        if (maxLocation.z > transform.position.z && minLocation.z < transform.position.z)
-            transform.position += transform.forward * speed * Time.deltaTime;
-        else
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
-            transform.Rotate(new Vector3(0f, 180f, 0f));
-            transform.position += transform.forward * speed * Time.deltaTime;
+            collision.gameObject.transform.SetParent(transform);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.transform.SetParent(null);
         }
     }
 }

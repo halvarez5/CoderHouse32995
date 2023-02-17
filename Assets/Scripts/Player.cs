@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int forceGravity = 5;
     [SerializeField] private float speed;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private Animator mAnimator;
 
     private bool canJump = true;
     private float defaultSpeed;
@@ -17,30 +18,57 @@ public class Player : MonoBehaviour
     void Start()
     {
         defaultSpeed = speed;
+        mAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float horizontalMovement = Input.GetAxisRaw("Horizontal");
-        float verticalMovement = Input.GetAxisRaw("Vertical");
+        float horizontalMovement = Input.GetAxis("Horizontal");
+        float verticalMovement = Input.GetAxis("Vertical");
+
 
         if (horizontalMovement == 1 || verticalMovement == 1 ||
             horizontalMovement == -1 || verticalMovement == -1)
-        {
+        {      
+            if (Input.GetKey(KeyCode.LeftShift))
+            { 
+                speed = defaultSpeed * 2;
+                mAnimator.SetFloat("trVittoRun", 1);
+                mAnimator.SetFloat("trVittoWalk", 0);
+            }
+            else
+            { 
+                speed = defaultSpeed;
+                mAnimator.SetFloat("trVittoWalk", 1);
+                mAnimator.SetFloat("trVittoRun", 0);
+            }
+
             transform.position += (transform.forward * verticalMovement + transform.right * horizontalMovement) * speed * Time.deltaTime;
         }
-
-        if (Input.GetKey(KeyCode.LeftShift))
-            speed = defaultSpeed * 2;
         else
-            speed = defaultSpeed;
+        {
+            mAnimator.SetFloat("trVittoWalk", 0);
+            mAnimator.SetFloat("trVittoRun", 0);
+        }
+
 
         Rotate(GetRotationInput());
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
+            mAnimator.SetTrigger("TrVittoJump");
             Jump();
+        }
+
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            mAnimator.SetBool("trVittoShoot", true);
+        }
+        else
+        {
+
+            mAnimator.SetBool("trVittoShoot", false);
         }
     }
 

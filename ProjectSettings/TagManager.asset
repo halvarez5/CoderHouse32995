@@ -9,6 +9,7 @@ TagManager:
   - Orc
   - Slime
   - Mage
+  - Floor
   layers:
   - Default
   - TransparentFX

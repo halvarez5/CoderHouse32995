@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health < 0)
+        if (health < 0 || transform.position.y < -10)
         {
             GameManager.UpdateGameState(GameState.Lose);
         }
@@ -35,7 +35,6 @@ public class Player : MonoBehaviour
         {
             float horizontalMovement = Input.GetAxis("Horizontal");
             float verticalMovement = Input.GetAxis("Vertical");
-
 
             if (horizontalMovement == 1 || verticalMovement == 1 ||
                 horizontalMovement == -1 || verticalMovement == -1)
@@ -87,15 +86,26 @@ public class Player : MonoBehaviour
         rb.AddForce(Vector3.up * forceGravity, ForceMode.Impulse);
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    canJump = true;
-    //}
+    /*private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            canJump = true;
+        }
+    }*/
 
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    canJump = false;
-    //}
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            canJump = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        canJump = false;
+    }
 
     private void Rotate(Vector2 p_scrollDelta)
     {

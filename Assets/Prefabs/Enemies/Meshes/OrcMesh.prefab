@@ -2018,7 +2018,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 6738368370040280788, guid: 9b4c663e4409aec4f931f4f1c0a4b6d0,
+    type: 3}
   mAnimator: {fileID: 8050147752963102472}
   health: 150
 --- !u!1 &7353156829144234862

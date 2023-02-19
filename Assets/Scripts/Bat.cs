@@ -7,7 +7,7 @@ public class Bat : MonoBehaviour
     [SerializeField] private float speed = 1f;
     [SerializeField] private Animator mAnimator;
 
-    public int health = 3;
+    public int health = 100;
 
     private Vector3 maxLocation;
     private Vector3 minLocation;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public int health = 3;
     public Rigidbody rb;
     [SerializeField] private Camera m_camera;
     [SerializeField] private int forceGravity = 5;
@@ -24,6 +25,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (health < 0)
+        {
+            Debug.Log("Tas muertito!!");
+        }
         float horizontalMovement = Input.GetAxis("Horizontal");
         float verticalMovement = Input.GetAxis("Vertical");
 

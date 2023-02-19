@@ -22,7 +22,6 @@ public class RaycastAim : MonoBehaviour
             var rb = hit.rigidbody;
             if (rb != null)
             {
-                Debug.Log("disparando a " + hit.collider.gameObject.name);
                 switch (hit.collider.tag)
                 {
                     case "Bat":

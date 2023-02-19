@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     {
         defaultSpeed = speed;
         mAnimator = GetComponent<Animator>();
+        GameManager.UpdateGameState(GameState.PlayerTurn);
     }
 
     // Update is called once per frame
@@ -27,53 +28,57 @@ public class Player : MonoBehaviour
     {
         if (health < 0)
         {
-            Debug.Log("Tas muertito!!");
+            GameManager.UpdateGameState(GameState.Lose);
         }
-        float horizontalMovement = Input.GetAxis("Horizontal");
-        float verticalMovement = Input.GetAxis("Vertical");
+
+        if (GameManager.state == GameState.PlayerTurn)
+        {
+            float horizontalMovement = Input.GetAxis("Horizontal");
+            float verticalMovement = Input.GetAxis("Vertical");
 
 
-        if (horizontalMovement == 1 || verticalMovement == 1 ||
-            horizontalMovement == -1 || verticalMovement == -1)
-        {      
-            if (Input.GetKey(KeyCode.LeftShift))
-            { 
-                speed = defaultSpeed * 2;
-                mAnimator.SetFloat("trVittoRun", 1);
-                mAnimator.SetFloat("trVittoWalk", 0);
+            if (horizontalMovement == 1 || verticalMovement == 1 ||
+                horizontalMovement == -1 || verticalMovement == -1)
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    speed = defaultSpeed * 2;
+                    mAnimator.SetFloat("trVittoRun", 1);
+                    mAnimator.SetFloat("trVittoWalk", 0);
+                }
+                else
+                {
+                    speed = defaultSpeed;
+                    mAnimator.SetFloat("trVittoWalk", 1);
+                    mAnimator.SetFloat("trVittoRun", 0);
+                }
+
+                transform.position += (transform.forward * verticalMovement + transform.right * horizontalMovement) * speed * Time.deltaTime;
             }
             else
-            { 
-                speed = defaultSpeed;
-                mAnimator.SetFloat("trVittoWalk", 1);
+            {
+                mAnimator.SetFloat("trVittoWalk", 0);
                 mAnimator.SetFloat("trVittoRun", 0);
             }
 
-            transform.position += (transform.forward * verticalMovement + transform.right * horizontalMovement) * speed * Time.deltaTime;
-        }
-        else
-        {
-            mAnimator.SetFloat("trVittoWalk", 0);
-            mAnimator.SetFloat("trVittoRun", 0);
-        }
 
+            Rotate(GetRotationInput());
 
-        Rotate(GetRotationInput());
+            if (Input.GetKeyDown(KeyCode.Space) && canJump)
+            {
+                mAnimator.SetTrigger("TrVittoJump");
+                Jump();
+            }
 
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
-        {
-            mAnimator.SetTrigger("TrVittoJump");
-            Jump();
-        }
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                mAnimator.SetBool("trVittoShoot", true);
+            }
+            else
+            {
 
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            mAnimator.SetBool("trVittoShoot", true);
-        }
-        else
-        {
-
-            mAnimator.SetBool("trVittoShoot", false);
+                mAnimator.SetBool("trVittoShoot", false);
+            }
         }
     }
 

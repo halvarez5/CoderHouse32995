@@ -24,7 +24,6 @@ public class Mage : MonoBehaviour
 
             if (target.magnitude < 35)
             {
-                Debug.Log("esta en mi territorio!");
                 if (!startAttack)
                 {
                     startAttack = true;

@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     {
         if (health < 0 || transform.position.y < -10)
         {
+            mAnimator.SetTrigger("trVittoDie");
             GameManager.UpdateGameState(GameState.Lose);
         }
 

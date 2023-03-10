@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class GameManager : MonoBehaviour
     public bool dontDestroyOnLoad;
 
     public static GameState state;
-
+    public static int lives;
 
 
     private void Awake()
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        lives = 3;
     }
 
     public static void UpdateGameState(GameState newState)
@@ -46,11 +49,35 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+    public static void PauseGame()
+    {
+        if (Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+
+    public static void RestartGame()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    public static void UpdateLives(int p_quantity)
+    {
+        lives += p_quantity;
+    }
 }
+
 
 public enum GameState
 {
     PlayerTurn,
+    Paused,
     Victory,
     Lose
 }

@@ -22,6 +22,8 @@ public class Damage : MonoBehaviour
         {
             Player component = other.gameObject.GetComponent<Player>();
             component.health -= 1;
+
+            component.Corazones[component.health].SetActive(false);
         }
     }
 }

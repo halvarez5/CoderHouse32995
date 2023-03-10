@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private Animator mAnimator;
+    public GameObject[] Corazones;
+    public Text LifeScreen;
 
     private bool canJump = true;
     private float defaultSpeed;
@@ -26,10 +29,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health < 0 || transform.position.y < -10)
+        if ((health <= 0 || transform.position.y < -10) && GameManager.state != GameState.Lose)
         {
             mAnimator.SetTrigger("trVittoDie");
             GameManager.UpdateGameState(GameState.Lose);
+            GameManager.UpdateLives(-1);
+
+            LifeScreen.text = GameManager.lives.ToString();
+            
+            if (GameManager.lives == 0)
+            {
+                Debug.Log("GAME OVER");
+            }
         }
 
         if (GameManager.state == GameState.PlayerTurn)
@@ -79,6 +90,17 @@ public class Player : MonoBehaviour
 
                 mAnimator.SetBool("trVittoShoot", false);
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameManager.RestartGame();
+            }
+        }
+        
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.RestartGame();
         }
     }
 

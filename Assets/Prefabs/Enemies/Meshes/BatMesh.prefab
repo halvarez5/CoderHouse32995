@@ -899,10 +899,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ae4fa2826c0a4448842350da5f5278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  speed: 0.5
-  mAnimator: {fileID: 4858827717606240218}
+  entityData: {fileID: 11400000, guid: 2ac7ee19347d12e4cab57abc700e8125, type: 2}
   health: 180
+  mAnimator: {fileID: 4858827717606240218}
 --- !u!1 &6298047714067745876
 GameObject:
   m_ObjectHideFlags: 0

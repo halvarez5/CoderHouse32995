@@ -129,8 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8b7ad0591540a48b35ba78e680c746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  speed: 30
+  entityData: {fileID: 11400000, guid: 1407327ca5ef36740b303ce6e565ae50, type: 2}
 --- !u!114 &3739747631150631188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,8 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d7e7ab13d104449a11fd14f7e8eca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  speed: 30
+  entityData: {fileID: 11400000, guid: 1407327ca5ef36740b303ce6e565ae50, type: 2}
   rb: {fileID: 2383131571863456713}
   initialPosition: {fileID: 0}
 --- !u!1 &8969438368164399821

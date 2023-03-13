@@ -22,7 +22,7 @@ public class Orc : DestructibleEnemy
                 {
                     AnimationBool("trAttack", false);
                     AnimationBool("trWalk", true);
-                    transform.position += target.normalized * Time.deltaTime * speed;
+                    transform.position += target.normalized * Time.deltaTime * entityData.speed;
                     LookAtPlayer(target.normalized);
                 }
             }

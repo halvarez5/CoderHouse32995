@@ -4,7 +4,5 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int damage;
-    public float speed;
-
+    public EntityData entityData;
 }

@@ -37,7 +37,7 @@ public class Slime : DestructibleEnemy
                     break;
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, (direction == DirectionMove.left) ? maxLocation : minLocation, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, (direction == DirectionMove.left) ? maxLocation : minLocation, entityData.speed * Time.deltaTime);
         }
         else
         {

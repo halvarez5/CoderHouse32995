@@ -9,7 +9,7 @@ public class Sphere : Enemy
 
     void Start()
     {        
-        rb.AddForce((Camera.main.transform.position - transform.position).normalized * speed, ForceMode.Impulse);
+        rb.AddForce((Camera.main.transform.position - transform.position).normalized * entityData.speed, ForceMode.Impulse);
         Destroy(gameObject, 5f);
     }
 

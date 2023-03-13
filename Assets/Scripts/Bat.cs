@@ -19,27 +19,27 @@ public class Bat : DestructibleEnemy
         if (health > 0)
         {
             if (maxLocation.x > transform.position.x && minLocation.x < transform.position.x)
-                transform.position += transform.forward * speed * Time.deltaTime;
+                transform.position += transform.forward * entityData.speed * Time.deltaTime;
             else
             {
                 transform.Rotate(new Vector3(0f, 180f, 0f));
-                transform.position += transform.forward * speed * Time.deltaTime;
+                transform.position += transform.forward * entityData.speed * Time.deltaTime;
             }
 
             if (maxLocation.y > transform.position.y && minLocation.y < transform.position.y)
-                transform.position += transform.forward * speed * Time.deltaTime;
+                transform.position += transform.forward * entityData.speed * Time.deltaTime;
             else
             {
                 transform.Rotate(new Vector3(0f, 180f, 0f));
-                transform.position += transform.forward * speed * Time.deltaTime;
+                transform.position += transform.forward * entityData.speed * Time.deltaTime;
             }
 
             if (maxLocation.z > transform.position.z && minLocation.z < transform.position.z)
-                transform.position += transform.forward * speed * Time.deltaTime;
+                transform.position += transform.forward * entityData.speed * Time.deltaTime;
             else
             {
                 transform.Rotate(new Vector3(0f, 180f, 0f));
-                transform.position += transform.forward * speed * Time.deltaTime;
+                transform.position += transform.forward * entityData.speed * Time.deltaTime;
             }
         }
         else

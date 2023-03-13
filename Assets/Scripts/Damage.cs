@@ -8,7 +8,7 @@ public class Damage : MonoBehaviour
 
     private void Awake()
     {
-        damage = GetComponentInParent<Enemy>().damage;    
+        damage = GetComponentInParent<Enemy>().entityData.damage;    
     }
 
     private void OnTriggerEnter(Collider other)

@@ -163,13 +163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcf74ec6eceb1f46a88e5d549ef01a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  speed: 1
+  entityData: {fileID: 11400000, guid: e6f07d3cb7e35684cb8c142bcadfd6d5, type: 2}
+  health: 100
   mAnimator: {fileID: 2670988432442012533}
   direction: 0
   maxLocation: {x: -7.391103, y: -0.1100001, z: 39.81}
   minLocation: {x: -7.391103, y: -0.1100001, z: 36.66}
-  health: 100
 --- !u!1 &3121018573782912164
 GameObject:
   m_ObjectHideFlags: 0

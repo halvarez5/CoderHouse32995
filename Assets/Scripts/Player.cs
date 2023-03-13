@@ -110,14 +110,6 @@ public class Player : MonoBehaviour
         rb.AddForce(Vector3.up * forceGravity, ForceMode.Impulse);
     }
 
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Floor"))
-        {
-            canJump = true;
-        }
-    }*/
-
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))

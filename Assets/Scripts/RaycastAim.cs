@@ -24,17 +24,9 @@ public class RaycastAim : MonoBehaviour
             {
                 switch (hit.collider.tag)
                 {
-                    case "Bat":
-                        Bat batComponent = hit.collider.gameObject.GetComponentInParent<Bat>();
-                        batComponent.health -= 1;
-                        break;
-                    case "Orc":
-                        Orc orcComponent = hit.collider.gameObject.GetComponentInParent<Orc>();
-                        orcComponent.health -= 1;
-                        break;
-                    case "Slime":
-                        Slime slimeComponent = hit.collider.gameObject.GetComponentInParent<Slime>();
-                        slimeComponent.health -= 1;
+                    case "Bat": case "Orc": case "Slime":
+                        DestructibleEnemy enemyComponent = hit.collider.gameObject.GetComponentInParent<DestructibleEnemy>();
+                        enemyComponent.RemoveHealth(1);
                         break;
                     case "Mage":
                         Mage mageComponent = hit.collider.gameObject.GetComponentInParent<Mage>();

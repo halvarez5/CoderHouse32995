@@ -12,6 +12,11 @@ public class DestructibleEnemy : Enemy
         mAnimator = GetComponent<Animator>();
     }
 
+    public void RemoveHealth(int quantity)
+    {
+        health -= quantity;
+    }
+
     public void AnimationTrigger(string name)
     {
         mAnimator.SetTrigger(name);

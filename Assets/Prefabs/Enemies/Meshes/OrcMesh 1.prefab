@@ -1988,6 +1988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e35c6477f9712d419f735c0e1c7fc7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
   speed: 2
   playerTransform: {fileID: 6738368370040280788, guid: 9b4c663e4409aec4f931f4f1c0a4b6d0,
     type: 3}

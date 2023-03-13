@@ -2,13 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bat : MonoBehaviour
+public class Bat : DestructibleEnemy
 {
-    [SerializeField] private float speed = 1f;
-    [SerializeField] private Animator mAnimator;
-
-    public int health = 100;
-
     private Vector3 maxLocation;
     private Vector3 minLocation;
 
@@ -16,12 +11,6 @@ public class Bat : MonoBehaviour
     {
         maxLocation = transform.position + new Vector3(3, 3, 3);
         minLocation = transform.position + new Vector3(-3, -3, -3);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        mAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -55,9 +44,10 @@ public class Bat : MonoBehaviour
         }
         else
         {
-            mAnimator.SetTrigger("trDie");
+            AnimationTrigger("trDie");
             Destroy(gameObject, 3f);
         }
     }
+
 
 }

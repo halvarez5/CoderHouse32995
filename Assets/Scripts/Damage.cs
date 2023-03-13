@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private int damage;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        damage = GetComponentInParent<Enemy>().damage;    
     }
 
     private void OnTriggerEnter(Collider other)
@@ -21,9 +16,7 @@ public class Damage : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Player component = other.gameObject.GetComponent<Player>();
-            component.health -= 1;
-
-            component.Corazones[component.health].SetActive(false);
+            component.RemoveHealth(damage);
         }
     }
 }

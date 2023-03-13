@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : MonoBehaviour
+public class Slime : DestructibleEnemy
 {
     enum DirectionMove
     {
@@ -10,21 +10,11 @@ public class Slime : MonoBehaviour
         right
     }
 
-    [SerializeField] private float speed = 1f;
-    [SerializeField] private Animator mAnimator;
     [SerializeField] private DirectionMove direction;
     [SerializeField] private Vector3 maxLocation;
     [SerializeField] private Vector3 minLocation;
 
-    public int health = 100;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        mAnimator = GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (health > 0)
@@ -51,7 +41,7 @@ public class Slime : MonoBehaviour
         }
         else
         {
-            mAnimator.SetTrigger("trDie");
+            AnimationTrigger("trDie");
             Destroy(gameObject, 3f);
         }
     }

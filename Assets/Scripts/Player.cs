@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    public int totalHealth = 3;
     public int health = 3;
     public Rigidbody rb;
     [SerializeField] private Camera m_camera;
@@ -142,5 +143,26 @@ public class Player : MonoBehaviour
         return new Vector2(l_mouseX, l_mouseY);
     }
 
+    public void RemoveHealth(int quantity)
+    {
+        bool isZero = health - quantity < 0;
+        health = isZero ? 0 : health - quantity;
+
+        for (int i = totalHealth - 1; i > health - 1; i--)
+        {
+            Corazones[i].SetActive(false);
+        }
+    }
+
+    public void AddHealth(int quantity)
+    {
+        bool fill = health + quantity > totalHealth;
+        health = fill ? totalHealth : health + quantity;
+
+        for (int i = 0; i > health; i++)
+        {
+            Corazones[i].SetActive(false);
+        }
+    }
 
 }

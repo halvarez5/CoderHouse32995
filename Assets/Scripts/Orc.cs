@@ -2,18 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Orc : MonoBehaviour
+public class Orc : DestructibleEnemy
 {
-    [SerializeField] float speed = 2.0f;
     [SerializeField] private Transform playerTransform;
-    [SerializeField] private Animator mAnimator;
-
-    public int health = 150;
-
-    void Start()
-    {
-        mAnimator = GetComponent<Animator>();
-    }
 
     void Update()
     {
@@ -25,24 +16,24 @@ public class Orc : MonoBehaviour
             {
                 if (target.magnitude < 1)
                 {
-                    mAnimator.SetBool("trAttack", true);
+                    AnimationBool("trAttack", true);
                 }
                 else
                 {
-                    mAnimator.SetBool("trAttack", false);
-                    mAnimator.SetBool("trWalk", true);
+                    AnimationBool("trAttack", false);
+                    AnimationBool("trWalk", true);
                     transform.position += target.normalized * Time.deltaTime * speed;
                     LookAtPlayer(target.normalized);
                 }
             }
             else
             {
-                mAnimator.SetBool("trWalk", false);
+                AnimationBool("trWalk", false);
             }
         }
         else
         {
-            mAnimator.SetTrigger("trDie");
+            AnimationTrigger("trDie");
             Destroy(gameObject, 3f);
         }
     }

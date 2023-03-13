@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2383131571863456714}
   - component: {fileID: 2383131571863456715}
   - component: {fileID: 2383131571863456713}
+  - component: {fileID: 6459951722122452548}
   - component: {fileID: 3739747631150631188}
-  - component: {fileID: 1492335070491698362}
   m_Layer: 7
   m_Name: Municion
   m_TagString: Enemy
@@ -117,6 +117,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6459951722122452548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2383131571863456718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8b7ad0591540a48b35ba78e680c746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  speed: 30
 --- !u!114 &3739747631150631188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,18 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2383131571863456713}
   initialPosition: {fileID: 0}
---- !u!114 &1492335070491698362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2383131571863456718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7f23c9523fe65d40b5da7d72ee2c233, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8969438368164399821
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,6 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3835952682265866975}
   - component: {fileID: 5120705578613090944}
+  - component: {fileID: 6127361954192152656}
   m_Layer: 7
   m_Name: obj
   m_TagString: Untagged
@@ -188,3 +191,15 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6127361954192152656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8969438368164399821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7f23c9523fe65d40b5da7d72ee2c233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

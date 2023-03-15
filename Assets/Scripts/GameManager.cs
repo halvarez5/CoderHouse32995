@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        lives = 3;
     }
 
     public static void UpdateGameState(GameState newState)
@@ -69,8 +68,21 @@ public class GameManager : MonoBehaviour
 
     public static void UpdateLives(int p_quantity)
     {
-        lives += p_quantity;
+        lives += p_quantity;        
     }
+
+    public static void PlayerDie()
+    {
+        UpdateGameState(GameState.Lose);
+        UpdateLives(-1);
+
+        if (lives == 0)
+        {
+            Debug.Log("GAME OVER");
+        }
+    }
+
+
 }
 
 

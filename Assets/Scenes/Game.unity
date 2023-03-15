@@ -1279,6 +1279,7 @@ GameObject:
   - component: {fileID: 141012894}
   - component: {fileID: 141012893}
   - component: {fileID: 141012892}
+  - component: {fileID: 141012895}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1343,7 +1344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1375,6 +1376,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &141012895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141012890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ac7963effb7e047939178b089c1bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LifeCount: {fileID: 608975771}
 --- !u!1 &144968224 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 114c8cecb2665554eb07114b8432558f,
@@ -13575,7 +13589,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1646823204
 MonoBehaviour:
@@ -13904,7 +13918,33 @@ MonoBehaviour:
   - {fileID: 779816401}
   - {fileID: 748326123}
   - {fileID: 654892179}
-  LifeScreen: {fileID: 608975771}
+  OnPlayerDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 350589549}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayerDie
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 141012895}
+        m_TargetAssemblyTypeName: SceneControl, Assembly-CSharp
+        m_MethodName: UpdateLifeCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &1705451653
 Animator:
   serializedVersion: 5
@@ -15905,6 +15945,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4858827717606240216, guid: 1ff29841dda2f7e44988967aa9c13423,
+        type: 3}
+      propertyPath: batDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4964303166474178296, guid: 1ff29841dda2f7e44988967aa9c13423,
         type: 3}
       propertyPath: m_RootOrder

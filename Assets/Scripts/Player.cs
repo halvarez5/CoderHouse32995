@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
@@ -14,7 +15,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private Animator mAnimator;
     public GameObject[] Corazones;
-    public Text LifeScreen;
+
+    public UnityEvent<bool> OnPlayerWalk;
+    public UnityEvent OnPlayerDamaged;
+    public UnityEvent OnPlayerDie;
 
     private bool canJump = true;
     private float defaultSpeed;
@@ -27,21 +31,15 @@ public class Player : MonoBehaviour
         GameManager.UpdateGameState(GameState.PlayerTurn);
     }
 
+
     // Update is called once per frame
     void Update()
     {
         if ((health <= 0 || transform.position.y < -10) && GameManager.state != GameState.Lose)
         {
+            Debug.Log("Llamado a evento OnPlayerDie");
+            OnPlayerDie?.Invoke();
             mAnimator.SetTrigger("trVittoDie");
-            GameManager.UpdateGameState(GameState.Lose);
-            GameManager.UpdateLives(-1);
-
-            LifeScreen.text = GameManager.lives.ToString();
-            
-            if (GameManager.lives == 0)
-            {
-                Debug.Log("GAME OVER");
-            }
         }
 
         if (GameManager.state == GameState.PlayerTurn)
@@ -64,6 +62,9 @@ public class Player : MonoBehaviour
                     mAnimator.SetFloat("trVittoWalk", 1);
                     mAnimator.SetFloat("trVittoRun", 0);
                 }
+
+                //Debug.Log("Llamado a evento OnPlayerWalk");
+                //OnPlayerWalk?.Invoke(true);
 
                 transform.position += (transform.forward * verticalMovement + transform.right * horizontalMovement) * speed * Time.deltaTime;
             }
@@ -144,6 +145,9 @@ public class Player : MonoBehaviour
         {
             Corazones[i].SetActive(false);
         }
+
+        Debug.Log("Llamado a evento OnPlayerDamaged");
+        OnPlayerDamaged?.Invoke();
     }
 
     public void AddHealth(int quantity)

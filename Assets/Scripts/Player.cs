@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
         defaultSpeed = speed;
         mAnimator = GetComponent<Animator>();
         GameManager.UpdateGameState(GameState.PlayerTurn);
+
+        OnPlayerDamaged.AddListener(DamageImpulse);
     }
 
 
@@ -140,7 +142,7 @@ public class Player : MonoBehaviour
     {
         bool isZero = health - quantity < 0;
         health = isZero ? 0 : health - quantity;
-
+        
         for (int i = totalHealth - 1; i > health - 1; i--)
         {
             Corazones[i].SetActive(false);
@@ -159,6 +161,11 @@ public class Player : MonoBehaviour
         {
             Corazones[i].SetActive(false);
         }
+    }
+
+    private void DamageImpulse()
+    {
+        rb.AddForce(Vector3.back * 5, ForceMode.Impulse);
     }
 
 }

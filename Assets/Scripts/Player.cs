@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private Animator mAnimator;
     public GameObject[] Corazones;
+    [SerializeField] private AudioSource audioSrc;
+    [SerializeField] private AudioClip sfx_Fire;
 
     public UnityEvent<bool> OnPlayerWalk;
     public UnityEvent OnPlayerDamaged;
@@ -31,6 +33,7 @@ public class Player : MonoBehaviour
         GameManager.UpdateGameState(GameState.PlayerTurn);
 
         OnPlayerDamaged.AddListener(DamageImpulse);
+        audioSrc.clip = sfx_Fire;
     }
 
 
@@ -85,14 +88,18 @@ public class Player : MonoBehaviour
                 Jump();
             }
 
+
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 mAnimator.SetBool("trVittoShoot", true);
+
+                if(!audioSrc.isPlaying) audioSrc.Play();
             }
             else
             {
-
                 mAnimator.SetBool("trVittoShoot", false);
+
+                if (audioSrc.isPlaying) audioSrc.Stop();
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))

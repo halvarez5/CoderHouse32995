@@ -32,15 +32,19 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private float sesitivity = 2;
 
+    private Quaternion camRotation;
+
+    private void Start()
+    {
+        camRotation = transform.localRotation;
+    }
+
     private void FixedUpdate()
     {
-        float v = Input.GetAxis("Mouse Y") * -1;
+        camRotation.x += Input.GetAxis("Mouse Y") * -1 * sesitivity;
+        camRotation.x = Mathf.Clamp(camRotation.x, -20, 10);
 
-        if (v != 0)
-        {
-            transform.RotateAround(transform.position, transform.right, v * 90 * sesitivity * Time.deltaTime);
-        }
-
+        transform.localRotation = Quaternion.Euler(camRotation.x, 0, 0);
 
     }
 }

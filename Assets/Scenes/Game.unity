@@ -1535,6 +1535,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4858827717606240216, guid: 1ff29841dda2f7e44988967aa9c13423,
+        type: 3}
+      propertyPath: batDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4964303166474178296, guid: 1ff29841dda2f7e44988967aa9c13423,
         type: 3}
       propertyPath: m_RootOrder
@@ -6948,6 +6953,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4858827717606240216, guid: 1ff29841dda2f7e44988967aa9c13423,
+        type: 3}
+      propertyPath: batDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4964303166474178296, guid: 1ff29841dda2f7e44988967aa9c13423,
         type: 3}
       propertyPath: m_RootOrder
@@ -10432,6 +10442,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4858827717606240216, guid: 1ff29841dda2f7e44988967aa9c13423,
+        type: 3}
+      propertyPath: batDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4964303166474178296, guid: 1ff29841dda2f7e44988967aa9c13423,
         type: 3}
       propertyPath: m_RootOrder
@@ -11978,6 +11993,16 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 964713672766530587, guid: 9b4c663e4409aec4f931f4f1c0a4b6d0,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221680421540407761, guid: 9b4c663e4409aec4f931f4f1c0a4b6d0,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.28
+      objectReference: {fileID: 0}
     - target: {fileID: 4182349437979323016, guid: 9b4c663e4409aec4f931f4f1c0a4b6d0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12017,6 +12042,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -4.119
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565576684206954478, guid: 9b4c663e4409aec4f931f4f1c0a4b6d0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6738368369963236439, guid: 9b4c663e4409aec4f931f4f1c0a4b6d0,
         type: 3}
@@ -12440,6 +12470,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b4c663e4409aec4f931f4f1c0a4b6d0, type: 3}
+--- !u!82 &1378282851 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1221680421540407761, guid: 9b4c663e4409aec4f931f4f1c0a4b6d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1378282850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1394262796 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3e653e25b0f0cbb498904b08965942c1,
@@ -12902,6 +12938,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4858827717606240216, guid: 1ff29841dda2f7e44988967aa9c13423,
+        type: 3}
+      propertyPath: batDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4964303166474178296, guid: 1ff29841dda2f7e44988967aa9c13423,
         type: 3}
       propertyPath: m_RootOrder
@@ -13918,6 +13959,26 @@ MonoBehaviour:
   - {fileID: 779816401}
   - {fileID: 748326123}
   - {fileID: 654892179}
+  audioSrc: {fileID: 1378282851}
+  sfx_Fire: {fileID: 8300000, guid: 446f9488cf5753643a77ed473139e493, type: 3}
+  OnPlayerWalk:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerDamaged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1797711016}
+        m_TargetAssemblyTypeName: PlayerSounds, Assembly-CSharp
+        m_MethodName: HitSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnPlayerDie:
     m_PersistentCalls:
       m_Calls:
@@ -13936,6 +13997,18 @@ MonoBehaviour:
       - m_Target: {fileID: 141012895}
         m_TargetAssemblyTypeName: SceneControl, Assembly-CSharp
         m_MethodName: UpdateLifeCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1797711016}
+        m_TargetAssemblyTypeName: PlayerSounds, Assembly-CSharp
+        m_MethodName: LoseSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14704,6 +14777,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 114c8cecb2665554eb07114b8432558f, type: 3}
+--- !u!1 &1797711014 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 558863251642599105, guid: 9b4c663e4409aec4f931f4f1c0a4b6d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1378282850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1797711016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797711014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015dfdca30a855845a683fe67c424c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSrc: {fileID: 1797711017}
+  sfx_Hit: {fileID: 8300000, guid: c4f39cfaa10fd8d4485cbdaf8f3eb10f, type: 3}
+  sfx_Lose: {fileID: 8300000, guid: ab0313df285453949a62d3d5cde18494, type: 3}
+--- !u!82 &1797711017 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 964713672766530587, guid: 9b4c663e4409aec4f931f4f1c0a4b6d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1378282850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1799506070
 GameObject:
   m_ObjectHideFlags: 0
@@ -15292,6 +15392,21 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1705451655}
+    - target: {fileID: 7451462608466515500, guid: 4d946b6711f9ea846a967a0a4b4cb2a9,
+        type: 3}
+      propertyPath: OnEnemyDie.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451462608466515500, guid: 4d946b6711f9ea846a967a0a4b4cb2a9,
+        type: 3}
+      propertyPath: OnEnemyDie.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451462608466515500, guid: 4d946b6711f9ea846a967a0a4b4cb2a9,
+        type: 3}
+      propertyPath: OnEnemyDie.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7757872650807242162, guid: 4d946b6711f9ea846a967a0a4b4cb2a9,
         type: 3}
       propertyPath: m_Name
@@ -16994,6 +17109,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4858827717606240216, guid: 1ff29841dda2f7e44988967aa9c13423,
+        type: 3}
+      propertyPath: batDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4964303166474178296, guid: 1ff29841dda2f7e44988967aa9c13423,
         type: 3}
       propertyPath: m_RootOrder
@@ -17367,6 +17487,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4858827717606240216, guid: 1ff29841dda2f7e44988967aa9c13423,
+        type: 3}
+      propertyPath: batDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4964303166474178296, guid: 1ff29841dda2f7e44988967aa9c13423,
         type: 3}
       propertyPath: m_RootOrder

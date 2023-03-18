@@ -1,10 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Orc : DestructibleEnemy
 {
     [SerializeField] private Transform playerTransform;
+    [SerializeField] private AudioSource audioSrc;
+    [SerializeField] private AudioClip sfx_die;
+
+    public UnityEvent OnEnemyDie;
+
+    private void Start()
+    {
+        audioSrc.clip = sfx_die;
+        OnEnemyDie.AddListener(Die);
+    }
 
     void Update()
     {
@@ -33,9 +44,16 @@ public class Orc : DestructibleEnemy
         }
         else
         {
-            AnimationTrigger("trDie");
-            Destroy(gameObject, 3f);
+            OnEnemyDie?.Invoke();
+            OnEnemyDie.RemoveListener(Die);
         }
+    }
+
+    private void Die()
+    {
+        AnimationTrigger("trDie");
+        audioSrc.Play();
+        Destroy(gameObject, 3f);
     }
 
     private void LookAtPlayer(Vector3 _target)

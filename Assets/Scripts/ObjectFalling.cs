@@ -10,10 +10,10 @@ public class ObjectFalling : MonoBehaviour
     private bool falling = false;
 
     // Start is called before the first frame update
-    void Start()
+    /*void Start()
     {
         secondsToFall += Time.time;
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
@@ -23,8 +23,7 @@ public class ObjectFalling : MonoBehaviour
             if (Time.time > secondsToFall)
             {
                 Fall();
-                falling = true;
-                Destroy(gameObject, 3f);
+                //falling = true;
             }
         }
     }
@@ -33,6 +32,7 @@ public class ObjectFalling : MonoBehaviour
     {
         falling = true;
         secondsToFall += Time.time;
+        Destroy(gameObject, 3f + secondsToFall);
     }
 
     private void Fall()

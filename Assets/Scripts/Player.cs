@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     public UnityEvent<bool> OnPlayerWalk;
     public UnityEvent OnPlayerDamaged;
     public UnityEvent OnPlayerDie;
+    public UnityEvent OnPortalEnter;
 
     private bool canJump = true;
     private float defaultSpeed;
@@ -125,6 +126,15 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Floor"))
         {
             canJump = true;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("WardRobePortal"))
+        {
+            transform.position += new Vector3(0, 4, 10);
+            OnPortalEnter?.Invoke();
         }
     }
 

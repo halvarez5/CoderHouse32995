@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class Player : MonoBehaviour
 {
@@ -17,8 +19,8 @@ public class Player : MonoBehaviour
     public GameObject[] Corazones;
     [SerializeField] private AudioSource audioSrc;
     [SerializeField] private AudioClip sfx_Fire;
+    [SerializeField] private Volume volume;
 
-    public UnityEvent<bool> OnPlayerWalk;
     public UnityEvent OnPlayerDamaged;
     public UnityEvent OnPlayerDie;
     public UnityEvent OnPortalEnter;
@@ -29,12 +31,16 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var l_profile = volume.profile;
         defaultSpeed = speed;
         mAnimator = GetComponent<Animator>();
         GameManager.UpdateGameState(GameState.PlayerTurn);
 
         OnPlayerDamaged.AddListener(DamageImpulse);
+        OnPlayerDie.AddListener(EnableGrayScaleScreen);
         audioSrc.clip = sfx_Fire;
+
+        DisableGrayScaleScreen();
     }
 
 
@@ -45,6 +51,8 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Llamado a evento OnPlayerDie");
             OnPlayerDie?.Invoke();
+            OnPlayerDie.RemoveListener(EnableGrayScaleScreen);
+
             mAnimator.SetTrigger("trVittoDie");
         }
 
@@ -133,7 +141,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("WardRobePortal"))
         {
-            transform.position += new Vector3(0, 4, 10);
+            transform.position = new Vector3(-6f, 0.1f, 0f);
             OnPortalEnter?.Invoke();
         }
     }
@@ -183,6 +191,22 @@ public class Player : MonoBehaviour
     private void DamageImpulse()
     {
         rb.AddForce(Vector3.back * 5, ForceMode.Impulse);
+    }
+
+    private void EnableGrayScaleScreen()
+    {
+        if (volume.profile.TryGet(out ColorAdjustments p_colorAdjustements))
+        {
+            p_colorAdjustements.saturation.value = -100;
+        }
+    }
+
+    private void DisableGrayScaleScreen()
+    {
+        if (volume.profile.TryGet(out ColorAdjustments p_colorAdjustements))
+        {
+            p_colorAdjustements.saturation.value = 20;
+        }
     }
 
 }

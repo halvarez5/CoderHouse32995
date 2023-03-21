@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,11 +31,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public static void UpdateGameState(GameState newState)
+    public static void ReadGameState(GameState gs)
     {
-        state = newState;
-
-        switch (newState)
+        switch (gs)
         {
             case GameState.PlayerTurn:
                 break;
@@ -47,6 +46,12 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public static void UpdateGameState(GameState newState)
+    {
+        state = newState;
+        ReadGameState(state);
     }
 
     public static void PauseGame()

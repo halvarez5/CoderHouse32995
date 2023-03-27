@@ -141,7 +141,8 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("WardRobePortal"))
         {
-            transform.position = new Vector3(-6f, 0.1f, 0f);
+            //transform.position = new Vector3(-6f, 0.1f, 0f);
+            transform.position += new Vector3(0f, 6f, 0f);
             OnPortalEnter?.Invoke();
         }
     }

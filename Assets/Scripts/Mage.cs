@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Mage : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Mage : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Animator mAnimator;
     public GameObject Ball;
+    public UnityEvent OnMageDie;
 
     private bool startAttack = false;
 
@@ -39,6 +41,7 @@ public class Mage : MonoBehaviour
         {
             startAttack = false;
             mAnimator.SetTrigger("trDie");
+            OnMageDie?.Invoke();
             Destroy(gameObject, 3f);
         }
     }

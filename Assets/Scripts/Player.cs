@@ -145,6 +145,11 @@ public class Player : MonoBehaviour
             transform.position += new Vector3(0f, 6f, 0f);
             OnPortalEnter?.Invoke();
         }
+        if (collision.gameObject.CompareTag("PortalLevel2"))
+        {
+            transform.position = new Vector3(60f, 3.6f, 203f);
+            OnPortalEnter?.Invoke();
+        }
     }
 
     private void OnCollisionExit(Collision collision)

@@ -11,6 +11,7 @@ TagManager:
   - Mage
   - Floor
   - WardRobePortal
+  - PortalLevel2
   layers:
   - Default
   - TransparentFX

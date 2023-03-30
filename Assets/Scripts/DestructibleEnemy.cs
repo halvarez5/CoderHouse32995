@@ -14,7 +14,8 @@ public class DestructibleEnemy : Enemy
 
     public void RemoveHealth(int quantity)
     {
-        health -= quantity;
+        if(health > 0)
+            health -= quantity;
     }
 
     public void AnimationTrigger(string name)

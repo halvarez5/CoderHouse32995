@@ -12,6 +12,7 @@ TagManager:
   - Floor
   - WardRobePortal
   - PortalLevel2
+  - FinalPortal
   layers:
   - Default
   - TransparentFX

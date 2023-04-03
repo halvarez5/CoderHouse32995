@@ -31,6 +31,9 @@ public class CameraController : MonoBehaviour
     #endregion
 
     [SerializeField] private float sesitivity = 2;
+    public CinemachineVirtualCamera vittoCamera;
+    public CinemachineVirtualCamera bossCamera;
+    public CinemachineVirtualCamera roomCamera;
 
     private Quaternion camRotation;
 
@@ -45,6 +48,12 @@ public class CameraController : MonoBehaviour
         camRotation.x = Mathf.Clamp(camRotation.x, -20, 10);
 
         transform.localRotation = Quaternion.Euler(camRotation.x, 0, 0);
+    }
 
+    public void ChangeCamera(CinemachineVirtualCamera c1, CinemachineVirtualCamera c2, CinemachineVirtualCamera c3)
+    {
+        c1.gameObject.SetActive(true);
+        c2.gameObject.SetActive(false);
+        c3.gameObject.SetActive(false);
     }
 }

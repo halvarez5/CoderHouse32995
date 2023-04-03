@@ -20,7 +20,12 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource audioSrc;
     [SerializeField] private AudioClip sfx_Fire;
     [SerializeField] private Volume volume;
+    [SerializeField] private Image portalImage;
+    [SerializeField] private GameObject Bear;
+    [SerializeField] private GameObject WardRobePortal;
+    [SerializeField] private CameraController CM;
 
+    public UnityEvent OnPlayerAppear;
     public UnityEvent OnPlayerDamaged;
     public UnityEvent OnPlayerDie;
     public UnityEvent OnPortalEnter;
@@ -31,6 +36,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        OnPlayerAppear?.Invoke();
         var l_profile = volume.profile;
         defaultSpeed = speed;
         mAnimator = GetComponent<Animator>();
@@ -41,13 +47,37 @@ public class Player : MonoBehaviour
         audioSrc.clip = sfx_Fire;
 
         DisableGrayScaleScreen();
+
+
+        switch (GameManager.level)
+        {
+            case 1:
+                transform.position = new Vector3(80f, 3.51f, 3.7f);
+                Bear.SetActive(true);
+                WardRobePortal.SetActive(false);
+                break;
+            case 2:
+                transform.position = new Vector3(60f, 3.6f, 203f);
+                Bear.SetActive(true);
+                WardRobePortal.SetActive(false);
+                break;
+            case 3:
+                transform.position = new Vector3(60f, 3.6f, 203f);
+                Bear.SetActive(true);
+                WardRobePortal.SetActive(false);
+                break;
+            default:
+                transform.position = new Vector3(81.8f, 0.01f, -0.3f);
+                Bear.SetActive(false);
+                WardRobePortal.SetActive(true);
+                break;
+        }
     }
 
 
-    // Update is called once per frame
     void Update()
     {
-        if ((health <= 0 || transform.position.y < -10) && GameManager.state != GameState.Lose)
+        if ((health <= 0 || transform.position.y < -10) && GameManager.state != GameState.Lose && GameManager.state != GameState.GameOver)
         {
             Debug.Log("Llamado a evento OnPlayerDie");
             OnPlayerDie?.Invoke();
@@ -76,9 +106,6 @@ public class Player : MonoBehaviour
                     mAnimator.SetFloat("trVittoWalk", 1);
                     mAnimator.SetFloat("trVittoRun", 0);
                 }
-
-                //Debug.Log("Llamado a evento OnPlayerWalk");
-                //OnPlayerWalk?.Invoke(true);
 
                 transform.position += (transform.forward * verticalMovement + transform.right * horizontalMovement) * speed * Time.deltaTime;
             }
@@ -110,17 +137,28 @@ public class Player : MonoBehaviour
 
                 if (audioSrc.isPlaying) audioSrc.Stop();
             }
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                GameManager.RestartGame();
-            }
         }
-        
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GameManager.RestartGame();
+            GameManager.PauseGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (GameManager.state == GameState.Lose)
+            {
+                GameManager.RestartGame();
+                PortalEnter();
+            }
+
+            if (GameManager.state == GameState.GameOver || GameManager.state == GameState.Victory)
+            {
+                GameManager.lives = 3;
+                GameManager.level = 0;
+                GameManager.RestartGame();
+                PortalEnter();
+            }
         }
     }
 
@@ -142,14 +180,37 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("WardRobePortal"))
         {
             //transform.position = new Vector3(-6f, 0.1f, 0f);
+            GameManager.level = 1;
+            PortalEnter();
             transform.position += new Vector3(0f, 6f, 0f);
             OnPortalEnter?.Invoke();
+            collision.gameObject.SetActive(false);
+            Bear.SetActive(true);
         }
         if (collision.gameObject.CompareTag("PortalLevel2"))
         {
+            GameManager.level = 2;
+            PortalEnter();
             transform.position = new Vector3(60f, 3.6f, 203f);
-            OnPortalEnter?.Invoke();
+            Invoke("enfoqueBoss", 1f);
         }
+        if (collision.gameObject.CompareTag("FinalPortal"))
+        {
+            GameManager.UpdateGameState(GameState.Victory);
+            PortalEnter();
+            transform.position = new Vector3(81.8f, 0.01f, -0.3f);
+            CM.ChangeCamera(CM.roomCamera, CM.vittoCamera, CM.bossCamera);
+        }
+    }
+
+    private void enfoqueBoss()
+    {
+        CM.ChangeCamera(CM.bossCamera, CM.roomCamera, CM.vittoCamera);
+        Invoke("enfoqueVitto", 3f);
+    }
+    private void enfoqueVitto()
+    {
+        CM.ChangeCamera(CM.vittoCamera, CM.roomCamera, CM.bossCamera);
     }
 
     private void OnCollisionExit(Collision collision)
@@ -171,16 +232,19 @@ public class Player : MonoBehaviour
 
     public void RemoveHealth(int quantity)
     {
-        bool isZero = health - quantity < 0;
-        health = isZero ? 0 : health - quantity;
-        
-        for (int i = totalHealth - 1; i > health - 1; i--)
+        if (GameManager.state == GameState.PlayerTurn)
         {
-            Corazones[i].SetActive(false);
-        }
+            bool isZero = health - quantity < 0;
+            health = isZero ? 0 : health - quantity;
 
-        Debug.Log("Llamado a evento OnPlayerDamaged");
-        OnPlayerDamaged?.Invoke();
+            for (int i = totalHealth - 1; i > health - 1; i--)
+            {
+                Corazones[i].SetActive(false);
+            }
+
+            Debug.Log("Llamado a evento OnPlayerDamaged");
+            OnPlayerDamaged?.Invoke();
+        }
     }
 
     public void AddHealth(int quantity)
@@ -213,6 +277,17 @@ public class Player : MonoBehaviour
         {
             p_colorAdjustements.saturation.value = 20;
         }
+    }
+
+    private void PortalEnter()
+    {
+        portalImage.gameObject.SetActive(true);
+        Invoke("PortalOut", 0.7f);
+    }
+
+    private void PortalOut()
+    {
+        portalImage.gameObject.SetActive(false);
     }
 
 }

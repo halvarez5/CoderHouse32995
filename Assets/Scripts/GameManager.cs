@@ -11,13 +11,14 @@ public class GameManager : MonoBehaviour
 
     public static GameState state;
     public static int lives;
-
+    public static int level;
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            state = GameState.Default;
 
             if (dontDestroyOnLoad)
             {
@@ -56,13 +57,15 @@ public class GameManager : MonoBehaviour
 
     public static void PauseGame()
     {
-        if (Time.timeScale == 1)
+        if (state == GameState.PlayerTurn)
         {
             Time.timeScale = 0;
+            UpdateGameState(GameState.Paused);
         }
-        else
+        else if(state == GameState.Paused)
         {
             Time.timeScale = 1;
+            UpdateGameState(GameState.PlayerTurn);
         }
     }
 
@@ -83,6 +86,7 @@ public class GameManager : MonoBehaviour
 
         if (lives == 0)
         {
+            UpdateGameState(GameState.GameOver);
             Debug.Log("GAME OVER");
         }
     }
@@ -93,8 +97,10 @@ public class GameManager : MonoBehaviour
 
 public enum GameState
 {
+    Default,
     PlayerTurn,
     Paused,
     Victory,
-    Lose
+    Lose,
+    GameOver
 }

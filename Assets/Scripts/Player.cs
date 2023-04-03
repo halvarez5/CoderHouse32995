@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
                 WardRobePortal.SetActive(false);
                 break;
             case 3:
-                transform.position = new Vector3(60f, 3.6f, 203f);
+                transform.position = new Vector3(172.6f, 6.5f, 190f);
                 Bear.SetActive(true);
                 WardRobePortal.SetActive(false);
                 break;
@@ -90,6 +90,11 @@ public class Player : MonoBehaviour
         {
             float horizontalMovement = Input.GetAxis("Horizontal");
             float verticalMovement = Input.GetAxis("Vertical");
+
+            if (GameManager.level == 2 && transform.position.x > 140)
+            {
+                GameManager.level = 3;
+            }
 
             if (horizontalMovement == 1 || verticalMovement == 1 ||
                 horizontalMovement == -1 || verticalMovement == -1)

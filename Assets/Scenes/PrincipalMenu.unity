@@ -918,6 +918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ac7963effb7e047939178b089c1bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AIM: {fileID: 0}
   LifeCount: {fileID: 0}
   pause: {fileID: 0}
   lose: {fileID: 0}

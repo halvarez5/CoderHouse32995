@@ -198,6 +198,8 @@ public class Player : MonoBehaviour
         {
             GameManager.UpdateGameState(GameState.Victory);
             PortalEnter();
+            mAnimator.SetFloat("trVittoWalk", 0);
+            mAnimator.SetFloat("trVittoRun", 0);
             transform.position = new Vector3(81.8f, 0.01f, -0.3f);
             CM.ChangeCamera(CM.roomCamera, CM.vittoCamera, CM.bossCamera);
         }
